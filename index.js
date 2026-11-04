@@ -3,6 +3,8 @@ const app = express();
 
 const port = process.env.PORT || 8080;
 
+console.log('nodejs version: ' + process.version);
+
 app.get('/', (req, res) => {
   res.send('Hello World!')
 });
