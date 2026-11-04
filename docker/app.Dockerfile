@@ -6,6 +6,8 @@ ENV TEST_BUILD_ROUTE=dockerfile
 
 WORKDIR /app
 
+RUN exit 1
+
 # 依存パッケージを先にインストール（package.json が変わらなければキャッシュが効く）
 COPY package*.json ./
 RUN npm ci --omit=dev
