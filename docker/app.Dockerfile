@@ -1,5 +1,5 @@
 # D1: plain Dockerfile route (NBC_DOCKERFILE=Dockerfile)
-FROM node:22-slim
+FROM node:26-slim
 
 ENV NODE_ENV=production
 ENV TEST_BUILD_ROUTE=dockerfile
