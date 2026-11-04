@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "build": "echo TEST: $TEST"
   },
   "author": "Shinsuke Marty Yamada",
   "license": "UNLICENSED",
