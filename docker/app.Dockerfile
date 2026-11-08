@@ -1,19 +1,11 @@
-# D1: plain Dockerfile route (NBC_DOCKERFILE=Dockerfile)
-FROM node:26-slim
-
-ENV NODE_ENV=production
-ENV TEST_BUILD_ROUTE=dockerfile
-
+FROM node:24-slim
 WORKDIR /app
 
-RUN exit 1
-
-# 依存パッケージを先にインストール（package.json が変わらなければキャッシュが効く）
-COPY package*.json ./
-RUN npm ci --omit=dev
-
-# アプリ本体をすべてコピー
 COPY . .
+# Service Configs are available only inside a RUN that mounts the "nbc_env" secret
+RUN --mount=type=secret,id=nbc_env \
+    set -a; [ -f /run/secrets/nbc_env ] && . /run/secrets/nbc_env; set +a; \
+    npm ci && npm run build && npm prune --omit=dev && npm cache clean --force
 
-USER node
+ENV NODE_ENV=production
 CMD ["npm", "start"]
